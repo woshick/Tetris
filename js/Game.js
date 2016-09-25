@@ -143,11 +143,11 @@
 			//阻止默认事件
 			event.preventDefault();
 			//用户的手指左边移动、右边移动。20是一咯噔
-			if(event.touches[0].clientX - startX < -20  && ismove){ 
+			if(event.touches[0].clientX - startX < -40  && ismove){ 
 				startX = event.touches[0].clientX;
 				self.goLeft();
 				ismove = false;
-			}else if(event.touches[0].clientX - startX > 20 && ismove){
+			}else if(event.touches[0].clientX - startX > 40 && ismove){
 				startX = event.touches[0].clientX;
 				self.goRight();
 				ismove = false;
