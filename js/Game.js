@@ -120,67 +120,11 @@
 					}
  			}
 		}
-				// //记录手指的开始位置
-		// var startX;
-		// var startY;
-		// var lock = true;
-		// var ismove = true;
-		
-		// //手指监听
-		// document.addEventListener("touchstart", function(event){
-		// 	// console.log(event);
-		// 	//阻止默认事件
-		// 	event.preventDefault();
-		// 	//记录开始的X值
-		// 	startX = event.touches[0].clientX;
-		// 	startY = event.touches[0].clientY;
- 			
- 	// 		//开锁
- 	// 		lock = true;
-		// },false);
-
-		// document.addEventListener("touchmove", function(event){
-		// 	//阻止默认事件
-		// 	event.preventDefault();
-		// 	//用户的手指左边移动、右边移动。20是一咯噔
-		// 	if(event.touches[0].clientX - startX < -20  && ismove){ 
-		// 		startX = event.touches[0].clientX;
-		// 		self.goLeft();
-		// 		ismove = false;
-		// 	}else if(event.touches[0].clientX - startX > 20 && ismove){
-		// 		startX = event.touches[0].clientX;
-		// 		self.goRight();
-		// 		ismove = false;
-		// 	}
-		// 	if(event.touches[0].clientY - startY > 100 && lock && ismove){
-		// 		while(self.goDown()){ //通过lock控制该逻辑只执行1次
-		// 		}
-		// 		lock = false;
-		// 		ismove = false;
-		// 	}
-		// 	if(event.touches[0].clientY - startY < -100  && ismove){
-		// 		self.blockunit.changeDirection();
-		// 		ismove = false;
-		// 	}
-		// },false);
-
-		// //手指抬起
-		// document.addEventListener("touchend", function(event){
-		// 	//阻止默认事件
-		// 	event.preventDefault();
-
-		// 	//手指抬起的时候，有两套业务，如果用户移动了
-		// 	if(!ismove){
-		// 		ismove = true;
-		// 		return;
-		// 	}
-		// },true);
 		//记录手指的开始位置
 		var startX;
 		var startY;
 		var lock = true;
 		var ismove = true;
-		var isup = true;
 		
 		//手指监听
 		document.addEventListener("touchstart", function(event){
@@ -199,27 +143,24 @@
 			//阻止默认事件
 			event.preventDefault();
 			//用户的手指左边移动、右边移动。20是一咯噔
-			if(event.touches[0].clientX - startX < -20 ){ 
+			if(event.touches[0].clientX - startX < -20  && ismove){ 
 				startX = event.touches[0].clientX;
 				self.goLeft();
-				// ismove = false;
-			}else if(event.touches[0].clientX - startX > 20 ){
+				ismove = false;
+			}else if(event.touches[0].clientX - startX > 20 && ismove){
 				startX = event.touches[0].clientX;
 				self.goRight();
-				// ismove = false;
+				ismove = false;
 			}
-			if(event.touches[0].clientY - startY > 100 && lock){
-				// startY = event.touches[0].clientY;
+			if(event.touches[0].clientY - startY > 100 && lock && ismove){
 				while(self.goDown()){ //通过lock控制该逻辑只执行1次
 				}
 				lock = false;
-				// ismove = false;
+				ismove = false;
 			}
-			if(event.touches[0].clientY - startY < -100 && isup ){
-				startY = event.touches[0].clientY;
+			if(event.touches[0].clientY - startY < -100  && ismove){
 				self.blockunit.changeDirection();
-				isup=false;
-				// ismove = false;
+				ismove = false;
 			}
 		},false);
 
@@ -227,14 +168,73 @@
 		document.addEventListener("touchend", function(event){
 			//阻止默认事件
 			event.preventDefault();
+
 			//手指抬起的时候，有两套业务，如果用户移动了
 			if(!ismove){
 				ismove = true;
 				return;
 			}
-			lock=true;
-			isup=true;
 		},true);
+// 		//记录手指的开始位置
+// 		var startX;
+// 		var startY;
+// 		var lock = true;
+// 		var ismove = true;
+// 		var isup = true;
+		
+// 		//手指监听
+// 		document.addEventListener("touchstart", function(event){
+// 			// console.log(event);
+// 			//阻止默认事件
+// 			event.preventDefault();
+// 			//记录开始的X值
+// 			startX = event.touches[0].clientX;
+// 			startY = event.touches[0].clientY;
+ 			
+//  			//开锁
+//  			lock = true;
+// 		},false);
+
+// 		document.addEventListener("touchmove", function(event){
+// 			//阻止默认事件
+// 			event.preventDefault();
+// 			//用户的手指左边移动、右边移动。20是一咯噔
+// 			if(event.touches[0].clientX - startX < -20 ){ 
+// 				startX = event.touches[0].clientX;
+// 				self.goLeft();
+// 				// ismove = false;
+// 			}else if(event.touches[0].clientX - startX > 20 ){
+// 				startX = event.touches[0].clientX;
+// 				self.goRight();
+// 				// ismove = false;
+// 			}
+// 			if(event.touches[0].clientY - startY > 100 && lock){
+// 				// startY = event.touches[0].clientY;
+// 				while(self.goDown()){ //通过lock控制该逻辑只执行1次
+// 				}
+// 				lock = false;
+// 				// ismove = false;
+// 			}
+// 			if(event.touches[0].clientY - startY < -100 && isup ){
+// 				startY = event.touches[0].clientY;
+// 				self.blockunit.changeDirection();
+// 				isup=false;
+// 				// ismove = false;
+// 			}
+// 		},false);
+
+// 		//手指抬起
+// 		document.addEventListener("touchend", function(event){
+// 			//阻止默认事件
+// 			event.preventDefault();
+// 			//手指抬起的时候，有两套业务，如果用户移动了
+// 			if(!ismove){
+// 				ismove = true;
+// 				return;
+// 			}
+// 			lock=true;
+// 			isup=true;
+// 		},true);
 	}
 
 	//主循环
